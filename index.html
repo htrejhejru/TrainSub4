@@ -1,0 +1,124 @@
+<!-- ====== STRUCTURE PRINCIPALE DE SUBX GAME ====== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SUBX Game - Syllabes Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="main-wrapper">
+    <!-- ====== HEADER ====== -->
+    <header>
+        <div class="header-main">
+            <h1 id="main-title">SUBX Game</h1>
+            <p id="main-desc">Progresse de manière plus simple en t'entrainant sub par sub !</p>
+        </div>
+        <div class="header-row">
+            <div class="header-controls">
+                <div id="theme-toggle" title="Changer le mode sombre/clair">🌙</div>
+                <div id="theme-chooser" title="Changer le thème">🎨</div>
+                <div id="lang-toggle" title="Changer la langue">🌐</div>
+            </div>
+        </div>
+        <div id="stats-bar">
+            <span id="total-subs"></span>
+            <span id="total-mots"></span>
+            <span id="session-score"></span>
+            <span id="syllabes-pour-sub"></span>
+        </div>
+    </header>
+    <div class="main-content-row">
+        <!-- ====== SIDEBAR (Modes, Import, Historique) ====== -->
+        <aside id="sidebar">
+            <nav class="sidebar-block" id="modes-panel">
+                <h2 class="sidebar-title">Modes de jeu</h2>
+                <div class="modes-buttons">
+                    <button class="mode-btn selected" data-mode="subX"><span class="emoji">🔢</span> <span class="mode-label">Train Sub</span></button>
+                    <button class="mode-btn" data-mode="sub50"><span class="emoji">🎲</span> <span class="mode-label">Sub 50</span></button>
+                    <button class="mode-btn" data-mode="speedrun"><span class="emoji">⚡</span> <span class="mode-label">Speedrun</span></button>
+                    <button class="mode-btn" data-mode="casual"><span class="emoji">🕹️</span> <span class="mode-label">Min 1</span></button>
+                    <button class="mode-btn" data-mode="4lettres"><span class="emoji">🔡</span> <span class="mode-label">4 Lettres</span></button>
+                    <button class="mode-btn" data-mode="customskip"><span class="emoji">🛠️</span> <span class="mode-label">Custom Skip</span></button>
+                </div>
+                <div id="mode-config">
+                    <div id="config-subx" class="mode-config-block">
+                        <label id="difficulty-label" for="difficulty">‎ ‎ ‎ </label>
+                        <div class="difficulty-slider">
+                            <button id="difficulty-minus" type="button">-</button>
+                            <input type="range" id="difficulty" min="1" max="100" value="1">
+                            <button id="difficulty-plus" type="button">+</button>
+                            <span id="difficulty-value">1</span>
+                        </div>
+                    </div>
+                    <div id="config-speedrun" class="mode-config-block hidden">
+                        <label for="speedrun-count">Nb de syllabes (speedrun) :</label>
+                        <input type="number" id="speedrun-count" min="2" max="20" value="10">
+                    </div>
+                    <button id="start-btn">Démarrer</button>
+                    <button id="stop-btn" class="hidden">Arrêter</button>
+                    <button id="reset-customskip" class="hidden">Réinitialiser Custom</button>
+                </div>
+            </nav>
+            <div class="sidebar-block" id="import-panel">
+                <h2 class="sidebar-title">Liste personnalisée</h2>
+                <button id="toggle-import">Importer une liste</button>
+                <div id="custom-words-box" class="hidden">
+                    <input type="file" id="upload-txt" accept=".txt">
+                    <textarea id="custom-words" placeholder="Ou colle tes mots ici..."></textarea>
+                    <button id="load-custom">Charger</button>
+                    <button id="import-syllabes">Importer syllabes</button>
+                </div>
+            </div>
+            <div class="sidebar-block" id="history-panel">
+                <h2 class="sidebar-title">Historique</h2>
+                <button id="toggle-history">Afficher l'historique</button>
+                <div id="history-section" class="hidden">
+                    <div id="history-list"></div>
+                </div>
+            </div>
+        </aside>
+        <!-- ====== ZONE DE JEU PRINCIPALE ====== -->
+        <main id="game-panel">
+            <section id="game-section" class="hidden">
+                <div id="set-progress"></div>
+                <div id="syllabe-box"></div>
+                <div id="progress-bar"></div>
+                <div class="input-skip-row">
+                    <input type="text" id="guess-input" placeholder="Tape un mot..." autocomplete="off">
+                    <button id="bind-btn" title="Lier une touche pour skipper">Bind</button>
+                </div>
+                <div id="feedback"></div>
+                <div id="found-box"></div>
+                <div id="remaining-box"></div>
+                <div id="game-actions">
+                    <button id="return-btn" class="hidden">Retour menu</button>
+                </div>
+            </section>
+        </main>
+        <!-- ====== PANNEAU DROIT INFOS & CHATBOT ====== -->
+        <div id="right-panel">
+            <div id="site-info-bubble" class="info-bubble chatbot-msg chatbot-bot">
+                <b>Bienvenue sur SUBX&nbsp;!</b><br><br>Site d'entrainement sub Français pour Bombparty/Wordbomb. <br><br>Bouton "Bind" permettant d'assigner une touche qui vous permettra de skip la syllabe actuelle si vous bloquez dessus !<br>
+                <hr><small><br>Cliquez sur 🎨 pour changer de thème, 🌐 pour la langue, ou essayez les différents modes. 
+                <br></small>
+            </div>
+            <div id="chatbot-box">
+                <div id="chatbot-header">TokiBot <span class="chatbot-subtext">/c (syllabe)</span></div>
+                <div id="chatbot-messages"></div>
+                <div id="chatbot-input-row">
+                    <input type="text" id="chatbot-input" placeholder="Tape ici...">
+                    <button id="chatbot-send">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <small>SUBX Game &copy; 2025 | Syllabes & algorithmie | <a href="https://github.com/">GitHub</a></small>
+    </footer>
+</div>
+<!-- Charge le JS après tout le reste, pour l'API ! -->
+<script src="game.js"></script>
+</body>
+</html>
